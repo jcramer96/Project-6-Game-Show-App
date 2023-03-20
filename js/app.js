@@ -83,7 +83,7 @@ function checkWin() {
 */
 
 function resetGame() {
-    addPhraseToDisplay(getRandomPhrases(phrases));
+    addPhraseToDisplay(getRandomPhraseAsArray(phrases));
     document.querySelectorAll('chosen').forEach(element => {
         element.disabled = false;
         element.classList.remove('chosen');
@@ -98,6 +98,7 @@ addPhraseToDisplay(phraseArray);
 ===============================================================*/
 //hides the display when the game is started
 resetButton.addEventListener('click', () => {
+    resetGame();
     overlay.style.display = 'none';
 });
 //attaches the checkLetter() to the buttons onscreen
