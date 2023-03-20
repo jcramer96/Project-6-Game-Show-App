@@ -2,7 +2,7 @@
                     GLOBAL VARIABLES
 ===============================================================*/
 const qwertyButtons = document.getElementById('qwerty');
-const phrase = document.getElementById('phrase');
+let phrase = document.getElementById('phrase');
 let letters =  document.getElementsByClassName('letter');
 let missed = 0;
 const resetButton = document.querySelector('.btn__reset');
@@ -77,22 +77,27 @@ function checkWin() {
 
 //triggers CSS transition to fade letters in as they are revealed
 /*function fadeIn() {
-    const shown = document.getElementsByClassName('show');
-    shown.style.opacity = '100';
+    let letterBoxes = document.querySelectorAll('.show');
+    letterBoxes.style.opacity = '1.0';
 };
 */
 
 function resetGame() {
-    addPhraseToDisplay(getRandomPhraseAsArray(phrases));
-    document.querySelectorAll('chosen').forEach(element => {
+    document.querySelector('#phrase ul').textContent = "";
+    const phraseArray = getRandomPhraseAsArray(phrases);
+    addPhraseToDisplay(phraseArray);
+    document.querySelectorAll('.chosen').forEach(element => {
         element.disabled = false;
         element.classList.remove('chosen');
     });
-    let missed = 0;
+    let missedList = document.querySelectorAll('.tries img');
+    for (let i = 0; i < missedList.length; i++) {
+        missedList[i].src = 'images/liveHeart.png';
+        missedList[i].classList.remove('missed');
+        missedList[i].classList.add('tries');
+    }
+    missed = 0;
 };
-
-const phraseArray = getRandomPhraseAsArray(phrases);
-addPhraseToDisplay(phraseArray);
 /*===============================================================
                         EVENTS
 ===============================================================*/
@@ -105,15 +110,11 @@ resetButton.addEventListener('click', () => {
 qwerty.addEventListener('click', (e) => {
     let target = e.target;
         if(target.tagName === 'BUTTON') {
-           // adds button clicked to chosen class and disables it
             target.classList.add('chosen');
             target.setAttribute("disabled", "");
-           // call checkLetter() and store in variable
             let letterFound = checkLetter(target);
                 
             if(letterFound === null) {
-                //take away a life heart img
-                //increment missed counter
                 heartCounter[missed].src = 'images/lostHeart.png';
                 missed++;
             }

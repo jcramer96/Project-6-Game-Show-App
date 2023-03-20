@@ -69,6 +69,11 @@ button {
   padding: 10px;
 }
 
+img {
+  height: 35px;
+  width: 30px;
+}
+
 /* Title */
 
 .header {
@@ -95,7 +100,8 @@ button {
 .show {
   color: #000;
   background-color: #76CE82;
-  transition: opacity 2s;
+  transition: background-color 1s ease;
+  transition: color 1s ease;
 }
 
 /* Keyboard */
