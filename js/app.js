@@ -60,6 +60,7 @@ function checkWin() {
     let shownLetters = document.querySelectorAll('.show');
     let lettersInPhrase = document.querySelectorAll('.letter');
     if (shownLetters.length === lettersInPhrase.length) {
+        overlay.classList.remove("lose");
         overlay.classList.add("win");
         overlay.style.display = 'flex';
         const headline = document.querySelector('.title');
@@ -67,6 +68,7 @@ function checkWin() {
         resetButton.textContent = "Play Again"
     }
     if (missed > 4) {
+        overlay.classList.remove("win");
         overlay.classList.add("lose");
         overlay.style.display = 'flex';
         const headline = document.querySelector('.title');
